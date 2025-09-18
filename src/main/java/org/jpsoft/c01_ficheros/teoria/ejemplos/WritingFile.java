@@ -1,4 +1,4 @@
-package org.jpsoft.c01_clase_file;
+package org.jpsoft.c01_ficheros.teoria.ejemplos;
 
 import java.io.BufferedWriter;
 import java.io.File;
