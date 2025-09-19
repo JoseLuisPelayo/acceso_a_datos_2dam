@@ -9,6 +9,7 @@ reconstruye el objeto original a partir de dicha secuencia de bytes. Para que un
  pueden ser serializados.
  */
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -23,6 +24,7 @@ public class InterfazSerializable implements Serializable {
     explícitamente para asegurar la compatibilidad entre diferentes versiones de la clase y evitar posibles
     problemas durante la deserialización.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String nombre;
