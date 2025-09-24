@@ -1,7 +1,0 @@
-hola mundo
-esto es una prueba
-HOla desde Java
-buenos días
-la palabra hola aparece aquí
-otra línea cualquiera
-adiós
