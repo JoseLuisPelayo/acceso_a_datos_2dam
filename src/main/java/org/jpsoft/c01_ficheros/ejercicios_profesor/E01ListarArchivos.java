@@ -6,7 +6,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-public class E01Ejercicio {
+public class E01ListarArchivos {
     /*
     Crea un programa que solicite al usuario una ruta de directorio y muestre una lista de todos los archivos y
     subdirectorios contenidos en él. Para cada elemento, indica si es un archivo o un directorio, su tamaño en bytes
