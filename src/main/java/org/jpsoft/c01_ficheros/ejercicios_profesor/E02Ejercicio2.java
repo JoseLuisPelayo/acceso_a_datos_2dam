@@ -90,15 +90,15 @@ public class E02Ejercicio2 {
 // *************************************** NUEVA APROXIMACION ****************************************************************
 
             List<String> textWords = splitString(entryFileTextToString());
-            Comparator<Map.Entry<String, Integer>> comparator = Map.Entry.comparingByValue(Comparator.reverseOrder());
+            Comparator<Map.Entry<String, Integer>> comparatorByValue = Map.Entry.comparingByValue(Comparator.reverseOrder());
 
 
-            LinkedHashMap<String, Integer> newTry = textWords.stream().collect(Collectors.toMap(
+            LinkedHashMap<String, Integer> newTry = textWords.stream()
+                    .collect(Collectors.groupingBy(
                             w -> w,
-                            v -> 1,
-                            Integer::sum,
-                            LinkedHashMap::new))
-                    .entrySet().stream().sorted(comparator).collect(Collectors.toMap(
+                            Collectors.summingInt(w -> 1)
+                    ))
+                    .entrySet().stream().sorted(comparatorByValue).collect(Collectors.toMap(
                             Map.Entry::getKey,
                             Map.Entry::getValue,
                             (e1, e2) -> e1,
