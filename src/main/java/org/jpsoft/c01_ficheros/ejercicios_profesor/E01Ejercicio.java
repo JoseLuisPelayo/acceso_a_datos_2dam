@@ -6,7 +6,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-public class e01_ejercicio {
+public class E01Ejercicio {
     /*
     Crea un programa que solicite al usuario una ruta de directorio y muestre una lista de todos los archivos y
     subdirectorios contenidos en él. Para cada elemento, indica si es un archivo o un directorio, su tamaño en bytes
@@ -29,11 +29,11 @@ public class e01_ejercicio {
     public static void main(String[] args) {
         File folder = new File(path);
 
-        if (!folder.exists()) System.out.printf("El fichero %s no existe\n", path);
+        if (!folder.exists())
+            System.out.printf("El fichero %s no existe\n", path);
         else if (!folder.isDirectory())
             System.out.printf("El path proporcionado: %s es de un fichero, debe ser de un directorio.%n", path);
         else {
-
             File[] files = folder.listFiles();
             System.out.printf("\nDirectorio: %s", path);
 
