@@ -1,4 +1,5 @@
 # T1 Ficheros
+https://four-crime-470.notion.site/AD-UNIR-2719b610a38d8069a272c97d85fd0fb8
 
 **La clase File**: Explica cómo utilizar la clase File en Java para manejar archivos y directorios. Muestra métodos para verificar existencia, crear, eliminar y obtener información de archivos. Incluye ejemplos prácticos de implementación.
 

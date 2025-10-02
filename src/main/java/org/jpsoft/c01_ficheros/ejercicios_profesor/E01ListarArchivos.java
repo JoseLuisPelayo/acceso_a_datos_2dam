@@ -22,33 +22,48 @@ public class E01ListarArchivos {
                 - [DIRECTORIO] Imágenes - Última modificación: 10/09/2025 16:15
     */
 
-    private static final String path = "/home/jose/Documentos/aws";
-    private static final String template = "\n- [%s] %s - Última modificación: %s";
+//    private static final String path = "/home/jose/Documentos/aws";
 
 
-    public static void main(String[] args) {
+    private static final String template = "\n- [%s] %s %s- Última modificación: %s";
+
+    public static void directoryList(String path) {
         File folder = new File(path);
 
-        if (!folder.exists())
-            System.out.printf("El fichero %s no existe\n", path);
+        if (!folder.exists()) System.out.printf("El fichero %s no existe\n", path);
         else if (!folder.isDirectory())
             System.out.printf("El path proporcionado: %s es de un fichero, debe ser de un directorio.%n", path);
         else {
             File[] files = folder.listFiles();
             System.out.printf("\nDirectorio: %s", path);
-
             if (files.length == 0) System.out.printf("El directorio %s está vacío.%n", path);
             else {
-                Arrays.stream(files).forEach(f -> System.out.printf((template), typeOfFile(f), f.getName(), dateFromMilliseconds(f)));
+                Arrays.stream(files).forEach(f -> {
+                    System.out.printf((template), typeOfFile(f), f.getName(), fileSize(f), dateFromMilliseconds(f));
+                });
             }
-
         }
     }
 
+    public static void directoryList(String path, Boolean recursivity) {
+        File folder = new File(path);
 
-    private static String fileData(File f) {
-        String template = "- [%s] %s - Última modificación: %s";
-        return String.format(template, typeOfFile(f), f.getName(), dateFromMilliseconds(f));
+        if (!folder.exists()) System.out.printf("El fichero %s no existe\n", path);
+        else if (!folder.isDirectory())
+            System.out.printf("El path proporcionado: %s es de un fichero, debe ser de un directorio.%n", path);
+        else {
+            File[] files = folder.listFiles();
+            System.out.printf("\nDirectorio: %s", path);
+            if (files.length == 0) System.out.printf("El directorio %s está vacío.%n", path);
+            else {
+                Arrays.stream(files).forEach(f -> {
+                    System.out.printf((template), typeOfFile(f), f.getName(), fileSize(f), dateFromMilliseconds(f));
+                    if (f.isDirectory() && recursivity) {
+                        directoryList(f.getAbsolutePath(), true);
+                    }
+                });
+            }
+        }
     }
 
     private static String typeOfFile(File f) {
@@ -60,4 +75,11 @@ public class E01ListarArchivos {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").withZone(ZoneId.of("UTC"));
         return formatter.format(Instant.ofEpochMilli(f.lastModified()));
     }
+
+    private static String fileSize(File f) {
+        long size = f.length();
+
+        return f.isFile() ? String.format("(%d bytes) ", size) : "";
+    }
+
 }
