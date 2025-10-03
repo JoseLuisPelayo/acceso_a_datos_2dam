@@ -18,8 +18,8 @@ public class MenuPrinter {
         return String.format("""
                 Ruta del archivo: %s
                 
-                            === Contenido actual del archivo ===
-                            %s=== Fin del contenido ===
+                === Contenido actual del archivo ===
+                %s=== Fin del contenido ===
                 
                             ¿Qué desea hacer?
                                 1. Sobrescribir el archivo

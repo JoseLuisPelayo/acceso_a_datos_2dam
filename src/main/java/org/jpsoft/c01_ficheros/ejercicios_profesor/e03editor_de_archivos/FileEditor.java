@@ -13,41 +13,37 @@ public class FileEditor {
         this.sc = sc;
     }
 
-    public void fileEditorMenu(File file) throws IOException {
+    public void fileEditorMenu(File file) {
         int option = 0;
 
         do {
             option = drawMenu(file);
             switch (option) {
                 case 1 -> {
-                    System.out.println(MenuPrinter.fileEditionMenu(file.getAbsolutePath(), fileText(file)));
+                   overrideTextFile(file);
                 }
-                case 2 -> System.out.println("H");
+                case 2 -> {
+                    addTextToEndOfFile(file);
+                }
             }
         } while (option != 3);
 
     }
 
-    private int drawMenu(File file) throws IOException {
-        System.out.println(MenuPrinter.fileEditionMenu(file.getAbsolutePath(), fileText(file)));
-        int option = ScannerValidator.integerValidator(sc, MenuPrinter.fileEditionMenu(file.getAbsolutePath(), fileText(file)));
+    private int drawMenu(File file) {
+        System.out.println(MenuPrinter.fileEditionMenu(file.getAbsolutePath(), textFileReader(file)));
+        int option = ScannerValidator.integerValidator(sc, MenuPrinter.fileEditionMenu(file.getAbsolutePath(), textFileReader(file)));
 
         while (option < 0 || option > 3) {
             System.err.println("Opción no valida");
-            System.out.println(MenuPrinter.fileEditionMenu(file.getAbsolutePath(), fileText(file)));
-            option = ScannerValidator.integerValidator(sc, MenuPrinter.fileEditionMenu(file.getAbsolutePath(), fileText(file)));
+            System.out.println(MenuPrinter.fileEditionMenu(file.getAbsolutePath(), textFileReader(file)));
+            option = ScannerValidator.integerValidator(sc, MenuPrinter.fileEditionMenu(file.getAbsolutePath(), textFileReader(file)));
         }
 
         return option;
     }
 
-    private void addTextToEndOfFile(File file) throws IOException {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
-
-        }
-    }
-
-    private static String fileText(File file) throws IOException {
+    private static String textFileReader(File file) {
         StringBuilder builder = new StringBuilder();
 
         try (BufferedReader bf = new BufferedReader(new FileReader(file))) {
@@ -55,11 +51,34 @@ public class FileEditor {
             while (bf.ready()) {
                 builder.append(bf.readLine()).append("\n");
             }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
         return builder.toString();
     }
 
-    private static File filePromp() {
-        return null;
+    private void addTextToEndOfFile(File file) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(file, true))) {
+            System.out.print("Introduce la linea que quieres añadir: ");
+            sc.nextLine();
+            String line = sc.nextLine();
+            pw.println(line);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
+
+    private void overrideTextFile(File file) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(file))) {
+            System.out.print("Introduce el texto que quieras escribir en el archivo: ");
+            sc.nextLine();
+            String line = sc.nextLine();
+            pw.println(line);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

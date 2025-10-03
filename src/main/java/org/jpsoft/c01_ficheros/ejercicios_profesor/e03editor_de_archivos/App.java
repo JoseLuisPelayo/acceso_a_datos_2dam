@@ -1,9 +1,11 @@
 package org.jpsoft.c01_ficheros.ejercicios_profesor.e03editor_de_archivos;
 
+import org.jpsoft.mis_utilidades.FileUtils;
 import org.jpsoft.mis_utilidades.ScannerValidator;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class App {
@@ -21,52 +23,51 @@ public class App {
         do {
             opcion = drawMenu();
 
-            try {
-                switch (opcion) {
-                    case 1 -> createTextFile();
-                    case 2 ->{
-                        new FileEditor(sc).fileEditorMenu(new File(baseFolder, "prueba.txt"));
-                    }
+            switch (opcion) {
+                case 1 -> createTextFile();
+                case 2 -> {
+                    File f = new File(baseFolder + "/prueba.txt");
+                    if (FileUtils.ensureFile(f, sc)) {
+                        new FileEditor(sc).fileEditorMenu(f);
+                    } else
+                        continue;
                 }
-
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
             }
 
         } while (opcion != 3);
 
         sc.close();
-}
+    }
 
-private static int drawMenu() {
-    System.out.print(MenuPrinter.mainMenu());
-    int opcion = ScannerValidator.integerValidator(sc, MenuPrinter.mainMenu());
-
-    while (opcion < 0 || opcion > 3) {
-        System.err.println("Opción no valida");
+    private static int drawMenu() {
         System.out.print(MenuPrinter.mainMenu());
-        opcion = ScannerValidator.integerValidator(sc, MenuPrinter.mainMenu());
+        int opcion = ScannerValidator.integerValidator(sc, MenuPrinter.mainMenu());
+
+        while (opcion < 0 || opcion > 3) {
+            System.err.println("Opción no valida");
+            System.out.print(MenuPrinter.mainMenu());
+            opcion = ScannerValidator.integerValidator(sc, MenuPrinter.mainMenu());
+        }
+
+        return opcion;
     }
 
-    return opcion;
-}
+    private static void createTextFile() {
+        try {
+            String template = "%s.txt";
 
-private static void createTextFile() {
-    try {
-        String template = "%s.txt";
+            System.out.print("Introduce el nombre del archivo: ");
+            File file = new File(String.format("%s/%s.txt", baseFolder, sc.next()));
 
-        System.out.print("Introduce el nombre del archivo: ");
-        File file = new File(String.format("%s/%s.txt", baseFolder, sc.next()));
-
-        if (file.exists()) {
-            System.out.println("El archivo existe");
-        } else if (file.createNewFile())
-            System.out.printf("Archivo creado correctamente en: %s", file.getAbsolutePath());
-        else
-            System.out.println("Ocurrió un error inesperado");
-    } catch (IOException e) {
-        throw new RuntimeException(e);
+            if (file.exists()) {
+                System.out.println("El archivo existe");
+            } else if (file.createNewFile())
+                System.out.printf("Archivo creado correctamente en: %s", file.getAbsolutePath());
+            else
+                System.out.println("Ocurrió un error inesperado");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-}
 
 }
