@@ -20,7 +20,7 @@ public abstract class UtilitySerialization {
         }
     }
 
-    public static <T extends Serializable> List<T> deserializeObjects(File file, Class<T> classType) throws IOException, ClassNotFoundException {
+    public static <T extends Serializable> List<T> deserializeObjects(File file, Class<T> classType) throws IOException, ClassNotFoundException, ClassCastException {
         List<T> lista = new ArrayList<>();
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
