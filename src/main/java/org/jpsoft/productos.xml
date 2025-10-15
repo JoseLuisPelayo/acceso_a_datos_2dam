@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<productos>
+    <producto>
+        <nombre>Laptop ASUS</nombre>
+        <precio>899.99</precio>
+        <disponible>true</disponible>
+    </producto>
+    <producto>
+        <nombre>Monitor 24"</nombre>
+        <precio>249.50</precio>
+        <disponible>true</disponible>
+    </producto>
+    <producto>
+        <nombre>Teclado mecánico</nombre>
+        <precio>79.95</precio>
+        <disponible>false</disponible>
+    </producto>
+</productos>
