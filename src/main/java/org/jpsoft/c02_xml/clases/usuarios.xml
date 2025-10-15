@@ -1,0 +1,32 @@
+<!-- Esto es un comentario en XML
+
+
+    El fichero XML sta formado por nodos y
+    solo podemos tener una etiqueta ROOT que contendra el
+    resto de nodos.
+    Un nodo puede tener atributos como los de html o contenido
+-->
+
+<usuarios referencia="1">
+
+    <usuario nacionalidad="Española" edad="41">
+        <nombre>Jose</nombre>
+        <apellido>Pelayo</apellido>
+        <dni>12345a</dni></usuario>
+    <usuario nacionalidad="Francesa" edad="25">
+        <nombre>Pierre</nombre>
+        <apellido>golan</apellido>
+        <dni>234523Z</dni>
+    </usuario>
+    <usuario nacionalidad="Alemana" edad="33">
+        <nombre>Hansel</nombre>
+        <apellido>ApellidoAleman</apellido>
+        <dni>234123D</dni>
+    </usuario>
+    <usuario nacionalidad="Alemana" edad="28">
+        <nombre>Greta</nombre>
+        <apellido>thumber</apellido>
+        <dni>213463G</dni>
+    </usuario>
+
+</usuarios>
