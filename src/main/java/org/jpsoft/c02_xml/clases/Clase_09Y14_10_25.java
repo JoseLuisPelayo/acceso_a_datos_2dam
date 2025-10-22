@@ -4,6 +4,7 @@ import org.jpsoft.c02_xml.clases.model.Actor;
 import org.jpsoft.c02_xml.clases.model.Pelicula;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 

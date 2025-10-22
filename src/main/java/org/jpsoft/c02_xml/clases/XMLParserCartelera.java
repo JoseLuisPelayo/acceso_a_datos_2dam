@@ -37,7 +37,6 @@ public class XMLParserCartelera {
     private Element createCarteleraRootElement() {
         Element rootElement = this.document.createElement("cartelera");
         rootElement.setAttribute("id", "1");
-
         return rootElement;
     }
 
